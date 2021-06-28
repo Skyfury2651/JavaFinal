@@ -9,7 +9,6 @@ import java.util.Set;
 @Entity
 @Getter
 @Setter
-
 public class Product {
     @Id
     private int Id;
@@ -18,13 +17,13 @@ public class Product {
     private Long DateOfManf;
     private double price;
 
-    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Sale> sales;
 
     public void setSales(Set<Sale> sales) {
         this.sales = sales;
 
-        for(Sale c : sales) {
+        for (Sale c : sales) {
             c.setProduct(this);
         }
     }
@@ -32,8 +31,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int id, String name, String description, Long dateOfManf, double price) {
-        Id = id;
+    public Product(String name, String description, Long dateOfManf, double price) {
         this.name = name;
         this.description = description;
         DateOfManf = dateOfManf;
